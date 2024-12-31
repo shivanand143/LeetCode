@@ -1,3 +1,5 @@
+
+```markdown
 # Add Two Numbers (LeetCode Problem)
 
 This repository contains the solution to the [LeetCode problem](https://leetcode.com/problems/add-two-numbers/): **Add Two Numbers**.
@@ -93,8 +95,10 @@ class Solution {
         return dummy.next;
     }
 }
-```java
+```
+
 ---
+
 ### **Example Walkthrough**
 
 #### Input:
@@ -138,3 +142,4 @@ class Solution {
    `O(max(m, n))` for the output linked list.
 
 ---
+
