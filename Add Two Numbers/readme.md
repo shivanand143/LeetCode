@@ -1,6 +1,3 @@
-Here’s the detailed explanation formatted as **README.md** for GitHub:
-
-```markdown
 # Add Two Numbers (LeetCode Problem)
 
 This repository contains the solution to the [LeetCode problem](https://leetcode.com/problems/add-two-numbers/): **Add Two Numbers**.
@@ -96,8 +93,6 @@ class Solution {
         return dummy.next;
     }
 }
-```
-
 ---
 
 ### **Example Walkthrough**
