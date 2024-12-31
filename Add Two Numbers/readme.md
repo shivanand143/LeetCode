@@ -1,6 +1,5 @@
 Here's the correctly formatted **README.md** for GitHub:
 
-```markdown
 # Add Two Numbers (LeetCode Problem)
 
 This repository contains the solution to the [LeetCode problem](https://leetcode.com/problems/add-two-numbers/): **Add Two Numbers**.
