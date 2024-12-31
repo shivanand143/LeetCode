@@ -93,7 +93,7 @@ class Solution {
         return dummy.next;
     }
 }
----java
+```java
 ---
 ### **Example Walkthrough**
 
