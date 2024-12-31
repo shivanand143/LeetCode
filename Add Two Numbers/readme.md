@@ -1,3 +1,4 @@
+Here's the correctly formatted **README.md** for GitHub:
 
 ```markdown
 # Add Two Numbers (LeetCode Problem)
@@ -13,17 +14,24 @@ You may assume the two numbers do not contain any leading zero, except the numbe
 ### Example:
 
 #### Example 1:
-Input: `l1 = [2,4,3]`, `l2 = [5,6,4]`  
-Output: `[7,0,8]`  
-Explanation: 342 + 465 = 807.
+**Input:**  
+`l1 = [2,4,3]`, `l2 = [5,6,4]`  
+**Output:**  
+`[7,0,8]`  
+**Explanation:**  
+342 + 465 = 807.
 
 #### Example 2:
-Input: `l1 = [0]`, `l2 = [0]`  
-Output: `[0]`
+**Input:**  
+`l1 = [0]`, `l2 = [0]`  
+**Output:**  
+`[0]`
 
 #### Example 3:
-Input: `l1 = [9,9,9,9,9,9,9]`, `l2 = [9,9,9,9]`  
-Output: `[8,9,9,9,0,0,0,1]`
+**Input:**  
+`l1 = [9,9,9,9,9,9,9]`, `l2 = [9,9,9,9]`  
+**Output:**  
+`[8,9,9,9,0,0,0,1]`
 
 ---
 
@@ -31,14 +39,14 @@ Output: `[8,9,9,9,0,0,0,1]`
 
 The solution is implemented in Java. Here’s a step-by-step explanation:
 
-### **Key Variables**
-1. `dummy`: A placeholder node for the resultant linked list. Its `next` pointer will eventually point to the head of the result list.
-2. `current`: A pointer used to traverse and build the result list.
-3. `carry`: Stores the carry-over value when adding two digits.
+### Key Variables
+1. **`dummy`**: A placeholder node for the resultant linked list. Its `next` pointer will eventually point to the head of the result list.
+2. **`current`**: A pointer used to traverse and build the result list.
+3. **`carry`**: Stores the carry-over value when adding two digits.
 
 ---
 
-### **Algorithm**
+### Algorithm
 
 1. **Initialize Variables**:
    - Create a `dummy` node.
@@ -65,7 +73,7 @@ The solution is implemented in Java. Here’s a step-by-step explanation:
 
 ---
 
-### **Code**
+### Code
 
 ```java
 class Solution {
@@ -99,7 +107,7 @@ class Solution {
 
 ---
 
-### **Example Walkthrough**
+### Example Walkthrough
 
 #### Input:
 `l1 = [2, 4, 3]` (represents 342),  
@@ -132,7 +140,7 @@ class Solution {
 
 ---
 
-### **Complexity Analysis**
+### Complexity Analysis
 
 1. **Time Complexity**:  
    `O(max(m, n))`, where `m` and `n` are the lengths of `l1` and `l2`.  
@@ -143,3 +151,5 @@ class Solution {
 
 ---
 
+Let me know if you'd like to add more information!
+```
