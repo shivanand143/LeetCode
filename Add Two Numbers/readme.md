@@ -1,4 +1,3 @@
-Here's the correctly formatted **README.md** for GitHub:
 
 # Add Two Numbers (LeetCode Problem)
 
@@ -150,5 +149,4 @@ class Solution {
 
 ---
 
-Let me know if you'd like to add more information!
-```
+
