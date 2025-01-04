@@ -44,7 +44,7 @@ The brute force method generates all possible substrings and checks if each subs
 
 ### Java Code
 ```java
-public class LongestSubstringBruteForce {
+public class Solution {
     public static int lengthOfLongestSubstring(String s) {
         int maxLength = 0;
 
