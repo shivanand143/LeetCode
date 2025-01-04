@@ -1,4 +1,4 @@
-# Longest Substring Without Repeating Characters (Brute Force)
+# Longest Substring Without Repeating Characters
 
 This project implements a brute force solution to find the **length of the longest substring without repeating characters** in a given string using Java.
 
