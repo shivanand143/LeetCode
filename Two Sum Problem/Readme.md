@@ -1,6 +1,4 @@
-Here is the content formatted for your **GitHub README** file:
 
----
 
 # Two Sum Problem - LeetCode
 
