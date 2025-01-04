@@ -1,6 +1,6 @@
 # Longest Substring Without Repeating Characters
 
-This project implements a brute force solution to find the **length of the longest substring without repeating characters** in a given string using Java.
+This project implements an optimized solution to find the **length of the longest substring without repeating characters** in a given string using the sliding window technique in Java.
 
 ---
 
@@ -18,25 +18,17 @@ Given a string `s`, find the length of the longest substring that contains only 
 
 ---
 
-## Brute Force Approach
-The brute force method generates all possible substrings and checks if each substring contains unique characters. It then returns the maximum length of such substrings.
+## Optimized Approach: Sliding Window
+The sliding window method uses two pointers to efficiently find the longest substring without repeating characters. The approach eliminates the need to repeatedly generate and check substrings, resulting in faster execution.
 
 ### Algorithm
-1. **Iterate over all substrings**:
-   - Use two nested loops where:
-     - `i` is the starting index of the substring.
-     - `j` is the ending index of the substring.
-
-2. **Check uniqueness**:
-   - For each substring `s[i..j]`, check if all characters are unique.
-   - Use a helper function `isUnique` that uses a boolean array to track visited characters.
-
-3. **Update the maximum length**:
-   - If a substring is unique, calculate its length as `j - i + 1`.
-   - Update the maximum length if this length is greater than the previously stored value.
-
-4. **Return the result**:
-   - Return the maximum length after iterating through all substrings.
+1. Use two pointers (`start` and `end`) to represent a sliding window.
+2. Use a HashSet to store characters currently in the window.
+3. Iterate through the string:
+   - If a character is not in the HashSet, add it and move the `end` pointer to expand the window.
+   - If a character is already in the HashSet, remove characters from the window starting from `start` until the duplicate character is removed.
+4. Keep track of the maximum window size during the iteration.
+5. Return the maximum window size as the result.
 
 ---
 
@@ -44,39 +36,29 @@ The brute force method generates all possible substrings and checks if each subs
 
 ### Java Code
 ```java
-public class Solution {
+import java.util.HashSet;
+
+public class LongestSubstringOptimized {
     public static int lengthOfLongestSubstring(String s) {
         int maxLength = 0;
+        int start = 0;
+        HashSet<Character> uniqueChars = new HashSet<>();
 
-        // Iterate over all possible substrings
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j < s.length(); j++) {
-                if (isUnique(s, i, j)) {
-                    maxLength = Math.max(maxLength, j - i + 1);
-                }
+        for (int end = 0; end < s.length(); end++) {
+            while (uniqueChars.contains(s.charAt(end))) {
+                uniqueChars.remove(s.charAt(start));
+                start++;
             }
+            uniqueChars.add(s.charAt(end));
+            maxLength = Math.max(maxLength, end - start + 1);
         }
 
         return maxLength;
     }
 
-    // Helper method to check if all characters in the substring are unique
-    private static boolean isUnique(String s, int start, int end) {
-        boolean[] charSet = new boolean[128]; // Assume ASCII characters
-
-        for (int k = start; k <= end; k++) {
-            if (charSet[s.charAt(k)]) {
-                return false; // Duplicate character found
-            }
-            charSet[s.charAt(k)] = true;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) {
         String input = "abcabcbb";
-        System.out.println("Length of the longest substring (brute force): " + lengthOfLongestSubstring(input));
+        System.out.println("Length of the longest substring (optimized method): " + lengthOfLongestSubstring(input));
     }
 }
 ```
@@ -86,34 +68,28 @@ public class Solution {
 ## Explanation of Code
 
 ### Main Function (`lengthOfLongestSubstring`):
-- **Outer Loop (`i`)**:
-  - Iterates over all possible starting indices of substrings.
-- **Inner Loop (`j`)**:
-  - Iterates over all possible ending indices of substrings, starting from `i`.
-- **Helper Function (`isUnique`)**:
-  - Checks if all characters in the substring `s[i..j]` are unique using a boolean array `charSet`.
+- **HashSet**:
+  - A `HashSet` is used to keep track of the characters in the current sliding window.
+- **Sliding Window**:
+  - `start` is the beginning index of the window.
+  - `end` is the ending index of the window, iterating through the string.
+- **Duplicate Check**:
+  - If the character at `end` is already in the `HashSet`, increment `start` to shrink the window until the duplicate character is removed.
 - **Update Maximum Length**:
-  - If the substring is unique, calculate its length as `j - i + 1` and update the maximum length.
-
-### Helper Function (`isUnique`):
-- A boolean array `charSet` of size 128 is used to represent ASCII characters.
-- For each character in the substring, check if it already exists in `charSet`:
-  - If it exists, return `false` (not unique).
-  - Otherwise, mark the character as seen.
+  - At each step, calculate the length of the current window (`end - start + 1`) and update `maxLength` if it's larger.
 
 ---
 
 ## Complexity Analysis
 
 ### Time Complexity:
-- The **outer loop** runs **O(n)**.
-- The **inner loop** also runs **O(n)**.
-- For each substring, the `isUnique` function takes **O(n)** in the worst case to check uniqueness.
-- Total time complexity: **O(n³)**.
+- Each character is added to and removed from the `HashSet` at most once.
+- The `end` pointer iterates through the string once.
+- Overall time complexity: **O(n)**.
 
 ### Space Complexity:
-- The `isUnique` function uses a boolean array of size 128 (constant size for ASCII characters).
-- Space complexity: **O(1)**.
+- The `HashSet` stores at most `n` characters (in the worst case, all unique).
+- Space complexity: **O(n)**.
 
 ---
 
@@ -121,14 +97,15 @@ public class Solution {
 
 ### Input: `"abcabcbb"`
 
-1. **Outer Loop (`i = 0`)**:
-   - **Inner Loop (`j = 0`)**: Substring = "a", unique = true, maxLength = 1.
-   - **Inner Loop (`j = 1`)**: Substring = "ab", unique = true, maxLength = 2.
-   - **Inner Loop (`j = 2`)**: Substring = "abc", unique = true, maxLength = 3.
-   - **Inner Loop (`j = 3`)**: Substring = "abca", unique = false.
+1. **Initial State**:
+   - `start = 0`, `end = 0`, `uniqueChars = {}`.
 
-2. **Outer Loop (`i = 1`)**:
-   - Repeat the process for substrings starting at index `1`.
+2. **Step-by-Step Execution**:
+   - Add 'a' to `uniqueChars`, expand the window, `maxLength = 1`.
+   - Add 'b', expand the window, `maxLength = 2`.
+   - Add 'c', expand the window, `maxLength = 3`.
+   - Encounter 'a' (duplicate), shrink the window by removing 'a' from `uniqueChars` and increment `start`.
+   - Repeat the process for subsequent characters.
 
 3. **Final Output**:
    - The longest substring without repeating characters is "abc" with length `3`.
@@ -146,14 +123,14 @@ public class Solution {
 
 ---
 
-## Limitations of the Brute Force Approach
-- **Inefficient for large strings**:
-  - Due to its **O(n³)** time complexity, this approach is not suitable for long input strings.
-- **Optimized Approach**:
-  - Use the **sliding window technique** to reduce time complexity to **O(n)**.
+## Benefits of Sliding Window Method
+- **Efficient Execution**:
+  - Reduces the time complexity to **O(n)** compared to the naive **O(n³)** approach.
+- **Scalable**:
+  - Can handle larger input strings effectively.
 
 ---
 
 ## Conclusion
-The brute force solution is a simple and straightforward way to solve the problem of finding the longest substring without repeating characters. While it is not efficient for larger inputs, it provides a clear understanding of the problem and is useful as a stepping stone toward implementing optimized algorithms.
+The sliding window technique provides an efficient and elegant solution to the problem of finding the longest substring without repeating characters. It balances simplicity and performance, making it a practical choice for real-world applications.
 
